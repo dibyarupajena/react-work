@@ -1,32 +1,33 @@
 import { useState } from "react"
-import { memo } from 'react';
 
 function App() {
-  const [firstTitle, setFirstTitle] = useState("my name is harkirat");
-
-  function changeTitle() {
-    setFirstTitle("My name is " + Math.random())
-  }
-
+  const [todos, setTodos] = useState([{
+    title: "Go to gym",
+    description: "Need to hit the gym from 7-9PM"
+  }, {
+    title: "Go to Clas",
+    description: "Need to go to the class from 4-7 PM"
+  }, {
+    title: "Eat foor",
+    description: "Need to eat food from 2-4 PM"
+  }])
   return (
     <div>
-      <button onClick={changeTitle}>Click me to change the title</button>
-      <Header title={firstTitle} />
-      <br />
-      <Header title="My name is raman" />
-      <Header title="My name is raman" />
-      <Header title="My name is raman" />
-      <Header title="My name is raman" />
+      {/* {todos.map(todo => <Todo title={todo.title} description={todo.description} />)} This line is wrong and throws an error(if used instead of second line), since it doesnt have a key and confuses react */}
+      {todos.map((todo, index) => <Todo key={todo.id} title={todo.title} description={todo.description} />)}
     </div>
   )
 }
 
-//react.memo re-renders just the components with a dynamic prop{title} in this case
-// in this case, only the first <Header> re-renders above since it has dynamic props or state variables' effects
-const Header = memo(function ({title}) {
+function Todo({title, description}) {
   return <div>
-    {title}
+    <h1>
+      {title}
+    </h1>
+    <h4>
+      {description}
+    </h4>
   </div>
-})
+}
 
 export default App
