@@ -1,5 +1,9 @@
 import { useState } from "react"
 
+
+//setFirstTitle is present inside the lifecycle this App(), so anything setTitle rerenders
+//App() re-renders, so does the parent(App()) components and all its children components
+//inorder to avoid unneccesary re-renders, PUSH THE STATE DOWN--> see code in next commit
 function App() {
   const [firstTitle, setFirstTitle] = useState("my name is harkirat");
 
