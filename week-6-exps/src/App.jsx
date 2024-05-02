@@ -1,33 +1,27 @@
-import { useState } from "react"
-
 function App() {
-  const [todos, setTodos] = useState([{
-    title: "Go to gym",
-    description: "Need to hit the gym from 7-9PM"
-  }, {
-    title: "Go to Clas",
-    description: "Need to go to the class from 4-7 PM"
-  }, {
-    title: "Eat foor",
-    description: "Need to eat food from 2-4 PM"
-  }])
-  return (
-    <div>
-      {/* {todos.map(todo => <Todo title={todo.title} description={todo.description} />)} This line is wrong and throws an error(if used instead of second line), since it doesnt have a key and confuses react */}
-      {todos.map((todo, index) => <Todo key={todo.id} title={todo.title} description={todo.description} />)}
-    </div>
-  )
-}
-
-function Todo({title, description}) {
   return <div>
-    <h1>
-      {title}
-    </h1>
-    <h4>
-      {description}
-    </h4>
+  <CardWrapper innerComponent={<TextComponent />} />
+  <CardWrapper innerComponent={<TextComponent2 />} />
   </div>
-}
+  
+  }
+  
+  function CardWrapper({innerComponent}) {
+  // and inside the div, renders the prop
+  return <div style={{border: "2px solid black"}}>
+  {innerComponent}
+  </div>
+  }
 
-export default App
+  function TextComponent () {
+  return <div>
+  hi there
+  </div>
+  }
+  function TextComponent2 () {
+    return <div>
+    hi there but I'm from another div but I have the same wrapper wrapped around me!!!
+    </div>
+    }
+
+  export default App
