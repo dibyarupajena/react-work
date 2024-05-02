@@ -1,27 +1,33 @@
 import { useState } from "react"
 
-
-//setFirstTitle is present inside the lifecycle this App(), so anything setTitle rerenders
-//App() re-renders, so does the parent(App()) components and all its children components
-//inorder to avoid unneccesary re-renders, PUSH THE STATE DOWN--> see code in next commit
+//do npm install then npm run dev to see the project
+// using react dev tools see how these components vs the previous git commit version 
+//re-renders and if this solves the problem of unneccesary re-renderings in childs or not
 function App() {
-  const [firstTitle, setFirstTitle] = useState("my name is harkirat");
-
-  function changeTitle() {
-    setFirstTitle("My name is " + Math.random())
-  }
-
   return (
     <div>
-      <button onClick={changeTitle}>Click me to change the title</button>
-      <Header title={firstTitle} />
-      <Header title="My name is raman" />
+      <HeaderWithButton />
       <Header title="My name is raman" />
       <Header title="My name is raman" />
       <Header title="My name is raman" />
       <Header title="My name is raman" />
     </div>
   )
+}
+
+//wherever you keep the state variables, that function will re-render(along with any child components within it)
+//so keep the state component separate with the one components needing re-rendereing as a separate function
+function HeaderWithButton() {
+  const [firstTitle, setFirstTitle] = useState("my name is harkirat");
+
+  function changeTitle() {
+    setFirstTitle("My name is " + Math.random())
+  }
+
+  return <>
+    <button onClick={changeTitle}>Click me to change the title</button>
+    <Header title={firstTitle} />
+  </>
 }
 
 function Header({title}) {
