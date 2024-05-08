@@ -1,49 +1,28 @@
-//trying the previous code(getting data from an api) using
-//useEffect() but this we are getting it some a different api url(id)
-// i.e where we need to send the todo id and get results based on it
+// useful just for performance, 
+// useMemo- dont recompute- memoization
 
 import { useState } from "react";
-import { useEffect } from "react";
 
 function App() {
-  const [selectedId, setSelectedId] = useState(1);
-  
-  return <div>
-    <button onClick={function(){
-      setSelectedId(1);
-    }}>1</button>
-    <button onClick={function(){
-      setSelectedId(2);
-    }}>2</button>
-    <button onClick={function(){
-      setSelectedId(3);
-    }}>3</button>
-    <button onClick={function(){
-      setSelectedId(4);
-    }}>4</button>
-    <Todo id={selectedId} />
-  </div>
-}
+  const [counter, setCounter] = useState(0);
+  const [inputValue, setInputValue] = useState(1);
 
-function Todo({id}) {
-  const [todo, setTodo] = useState({});
 
-  useEffect(() => {
-    fetch("https://sum-server.100xdevs.com/todo?id=" + id)
-      .then(async function(res) {
-        const json = await res.json();
-        setTodo (json.todo);
-      })
-  }, [id])
+  let sum = 0;
+  for (let i = 1; i <= inputValue; i++) {
+    sum = sum + i;
+  }
 
   return <div>
-    Id: {id}
-    <h1>
-      {todo.title}
-    </h1>
-    <h4>
-      {todo.description}
-    </h4>
+    <input onChange={function(e) {
+      setInputValue(e.target.value);
+    }} placeholder={"Find sum from 1 to n"}></input>
+    <br />
+    Sum from 1 to {inputValue} is {sum}
+    <br />
+    <button onClick={() => {
+      setCounter(counter + 1);
+    }}>Counter ({counter})</button>
   </div>
 }
 
