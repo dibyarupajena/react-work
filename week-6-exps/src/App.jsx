@@ -1,5 +1,6 @@
 // solvong the previous problem with useMemo
-
+// Another difference is that useEffect runs after rendering, while useMemo runs during rendering.
+// thats why setFinalValue- state variable was needed for useEffect but not needed here for useMemo, returns works just fine
 import { useState, useMemo } from "react";
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
       for( let i = 1; i<= inputValue; i++){
         sum = sum + i;
       }
-      return sum; //do without this? no, needed to change a global variable
+      return sum; 
   }, [inputValue])                                    
 
   return <div>
