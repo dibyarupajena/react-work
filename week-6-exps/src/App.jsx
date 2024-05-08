@@ -1,22 +1,18 @@
-// solvong the previous problem with useEffects
-// demerits- extra state variable required, one extra render
-//when one state variable is dependent directly like in on another
-//state variable, best is to use useMemo
+// solvong the previous problem with useMemo
 
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 
 function App() {
   const [counter, setCounter] = useState(0);
   const [inputValue, setInputValue] = useState(1);
-  const [finalValue, setFinalValue] = useState(0);
  
 
-  useEffect(() => {
+  let finalValue = useMemo(() => {
       let sum = 0;
       for( let i = 1; i<= inputValue; i++){
         sum = sum + i;
       }
-      setFinalValue(sum); //do without this? no, needed to change a global variable
+      return sum; //do without this? no, needed to change a global variable
   }, [inputValue])                                    
 
   return <div>
