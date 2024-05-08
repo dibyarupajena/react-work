@@ -8,35 +8,45 @@ function App() {
   const [inputValue, setInputValue] = useState(1);
  
 
-  const doSomething = () => {
+  // const doSomething = () => {
+  //   let sum = 0;
+  //   for( let i = 1; i<= inputValue; i++){
+  //     sum = sum + i;
+  //   }
+  //   console.log(sum)
+  //   return sum; 
+  // }
+  // let globe = 10; 
+  // let finalValue = useEffect(() => {
+
+  //     const a = doSomething(); //no value is returned??
+  //     console.log("inside useEffect",a)
+  //     globe = a
+  //     //can useEffect be used to assign a value with a state variable updater
+  //     //ans- no I guess
+  //     // let sum = 0;
+  //     // for( let i = 1; i<= inputValue; i++){
+  //     //   sum = sum + i;
+  //     // }
+  //     // return sum; 
+  // }, [inputValue])                                    
+
+  let finalValue = useMemo(() => {
+// usememo is being able to assign a value (return ) a value to the 
+// the finalValue here while useEffect was unable to
     let sum = 0;
     for( let i = 1; i<= inputValue; i++){
       sum = sum + i;
     }
-    console.log(sum)
     return sum; 
-  }
-  let globe = 10; 
-  let finalValue = useEffect(() => {
-
-      const a = doSomething(); //no value is returned??
-      console.log("inside useEffect",a)
-      globe = a
-      //can useEffect be used to assign a value with a state variable updater
-      //ans- no I guess
-      // let sum = 0;
-      // for( let i = 1; i<= inputValue; i++){
-      //   sum = sum + i;
-      // }
-      // return sum; 
-  }, [inputValue])                                    
+}, [inputValue])  
 
   return <div>
     <input onChange={function(e) {
       setInputValue(e.target.value);
     }} placeholder={"Find sum from 1 to n"}></input>
     <br />
-    Sum from 1 to {inputValue} is {globe}
+    Sum from 1 to {inputValue} is {finalValue}
     <br />
     <button onClick={() => {
       setCounter(counter + 1);
