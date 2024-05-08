@@ -13,10 +13,17 @@ function App() {
     for( let i = 1; i<= inputValue; i++){
       sum = sum + i;
     }
+    console.log(sum)
     return sum; 
   }
+  let globe = 10; 
   let finalValue = useEffect(() => {
-      doSomething();
+
+      const a = doSomething(); //no value is returned??
+      console.log("inside useEffect",a)
+      globe = a
+      //can useEffect be used to assign a value with a state variable updater
+      //ans- no I guess
       // let sum = 0;
       // for( let i = 1; i<= inputValue; i++){
       //   sum = sum + i;
@@ -29,7 +36,7 @@ function App() {
       setInputValue(e.target.value);
     }} placeholder={"Find sum from 1 to n"}></input>
     <br />
-    Sum from 1 to {inputValue} is {finalValue}
+    Sum from 1 to {inputValue} is {globe}
     <br />
     <button onClick={() => {
       setCounter(counter + 1);
